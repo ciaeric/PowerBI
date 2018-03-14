@@ -1,84 +1,98 @@
 {
-    "dataRoles": [
-        {
-            "displayName": "Category Data",
-            "name": "category",
-            "kind": "Grouping"
-        },
-        {
-            "displayName": "Measure Data",
-            "name": "measure",
-            "kind": "Measure"
-        }
-    ],
-    "objects": {
-        "dataPoint": {
-            "displayName": "Data colors",
-            "properties": {
-                "defaultColor": {
-                    "displayName": "Default color",
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    }
-                },
-                "showAllDataPoints": {
-                    "displayName": "Show all",
-                    "type": {
-                        "bool": true
-                    }
-                },
-                "fill": {
-                    "displayName": "Fill",
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    }
-                },
-                "fillRule": {
-                    "displayName": "Color saturation",
-                    "type": {
-                        "fill": {}
-                    }
-                },
-                 "fontSize": {
-                    "displayName": "Text Size",
-                    "type": {
-                        "formatting": {
-                            "fontSize": true
-                        }
-                    }
-                }
-            }
-        }
+  "dataRoles": [
+    {
+      "displayName": "text KPI Content",
+      "name": "TextKPI",
+      "kind": "Measure",
+      "requiredTypes" : [{"numeric":true  }]
     },
-    "dataViewMappings": [
+    {
+      "displayName": "KPI Color Indicator",
+      "name": "ColorIndicator",
+      "kind": "Measure",
+      "requiredTypes" : [{"numeric":true  }]
+    }
+  ],
+
+  "dataViewMappings": [
+    {
+      "conditions": [
         {
-            "categorical": {
-                "categories": {
-                    "for": {
-                        "in": "category"
-                    },
-                    "dataReductionAlgorithm": {
-                        "top": {}
-                    }
-                },
-                "values": {
-                    "select": [
-                        {
-                            "bind": {
-                                "to": "measure"
-                            }
-                        }
-                    ]
-                }
-            }
+          "TextKPI": { "max": 1 },
+          "ColorIndicator": { "max": 1 }
         }
-    ]
+      ],
+      "categorical": {
+        "categories": {
+          "for": { "in": "TextKPI" },
+          "dataReductionAlgorithm": { "top": {} }
+        }
+      }
+
+    }
+  ],
+  "sorting": {
+    "default": { }
+  },
+
+  "objects": {
+    "General": {
+      "displayName": "General",
+      "properties": {
+        "ptextKPITitle": {
+          "displayName": "KPI Title",
+          "type": { "text": true }
+        }
+      }
+    },
+
+    "textFontSize": {
+      "displayName": "KPI Font Size",
+      "properties": {
+        "show": {
+          "displayName": "KPI Custom Font Size",
+          "type": { "bool": true }
+        },
+        "psizeTitle": {
+          "displayName": "Title",
+          "type": { "numeric": true }
+        },
+        "psizeTextKPI": {
+          "displayName": "KPI Content",
+          "type": { "numeric": true }
+        }
+      }
+    },
+    "textKPIColors": {
+      "displayName": "KPI Colors",
+      "properties": {
+        "pcolorA": {
+          "displayName": "Indicator =1",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "pcolorB": {
+          "displayName": "Indicator =2",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "pcolorC": {
+          "displayName": "Indicator =3",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "pcolorD": {
+          "displayName": "Indicator =4",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "pcolorText": {
+          "displayName": "Text",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "pcolorCircle": {
+          "displayName": "Circle",
+          "type": { "fill": { "solid": { "color": true } } }
+        }
+      }
+    }
+
+  }
+
 }
